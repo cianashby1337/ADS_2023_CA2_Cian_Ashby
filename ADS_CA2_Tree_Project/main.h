@@ -16,3 +16,7 @@ std::string readFile(std::string filePath) {
     }
     else std::cout << "Unable to open file, or file is empty.";
 }
+
+bool validator(std::string xml) {
+    return 0;
+}
