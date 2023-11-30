@@ -29,5 +29,6 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\..\..\..\..\..\Desktop\vs_sample_simple.xml" />
+    <Xml Include="..\..\..\..\..\..\Desktop\vs_sample.xml" />
   </ItemGroup>
 </Project>

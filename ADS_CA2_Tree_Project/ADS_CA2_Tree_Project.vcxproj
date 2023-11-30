@@ -133,6 +133,7 @@
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="..\..\..\..\..\..\Desktop\vs_sample.xml" />
     <Xml Include="..\..\..\..\..\..\Desktop\vs_sample_simple.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
