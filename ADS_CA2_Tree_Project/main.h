@@ -18,11 +18,11 @@ std::string readFile(std::string filePath) {
     else std::cout << "Unable to open file, or file is empty.";
 }
 
-bool validator(std::string xmlIn) {
-    std::string xml = xmlIn;
+bool validator(std::string xml) {
+    bool first = true, rootClosed = true;
     std::stack<std::string> valStack;
     std::string currentCheck;
-    while (xml.size() != 0) {
+    while (first && !xml.empty() || !valStack.empty() && !xml.empty()) {
         if(!valStack.empty()) std::cout << valStack.top() << std::endl;
         //check the tag
         //get substring between < and >
@@ -33,6 +33,9 @@ bool validator(std::string xmlIn) {
         std::cout << "currentCheck: " << currentCheck << std::endl;
         //open tag?
         if (currentCheck.at(1) != '/') {
+            if (first && currentCheck != "<dir>") return false;
+            first = false;
+            rootClosed = false;
             valStack.push(currentCheck);
         }
         //add to stack
@@ -43,9 +46,12 @@ bool validator(std::string xmlIn) {
             std::cout << currentCheck.substr(2, (currentCheck.find_first_of(">")-2)) << std::endl;
             if (valStack.top().substr(1, (valStack.top().find_first_of(">") - 1)) == currentCheck.substr(2, currentCheck.find_first_of(">")-2)) valStack.pop();
             else return false;
+            std::cout << currentCheck << " - " << valStack.size() << std::endl;
+            if (currentCheck == "</dir>" && valStack.empty()) rootClosed = true;
         };
+        std::cout << xml << std::endl;
             //take away from stack, non-matching returns false
         xml = xml.substr(xml.find_first_of(">")+1);
     }
-    return valStack.empty();
+    return valStack.empty() && xml.size() == 0 && rootClosed;
 }
