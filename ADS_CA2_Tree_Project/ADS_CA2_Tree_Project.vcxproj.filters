@@ -19,4 +19,30 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\..\..\..\..\..\Desktop\vs_sample.xml" />
+    <Xml Include="..\..\..\..\..\..\Desktop\vs_sample_simple.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DListIterator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeIterator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DListNode.h">
+      <Filter>Header Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
