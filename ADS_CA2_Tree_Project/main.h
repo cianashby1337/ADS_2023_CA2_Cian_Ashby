@@ -22,6 +22,7 @@ bool validator(std::string xml) {
     bool first = true, rootClosed = true;
     std::stack<std::string> valStack;
     std::string currentCheck;
+    bool isFolder = true;
     while (first && !xml.empty() || !valStack.empty() && !xml.empty()) {
         if(!valStack.empty()) std::cout << valStack.top() << std::endl;
         //check the tag
@@ -33,6 +34,11 @@ bool validator(std::string xml) {
         std::cout << "currentCheck: " << currentCheck << std::endl;
         //open tag?
         if (currentCheck.at(1) != '/') {
+            if (currentCheck == "<file>") isFolder = false;
+            if (isFolder) {
+                if (currentCheck == "<type>" || currentCheck == "<size>") return false;
+            }
+            else if (currentCheck == "<dir>") return false;
             if (first && currentCheck != "<dir>") return false;
             first = false;
             rootClosed = false;
@@ -41,9 +47,7 @@ bool validator(std::string xml) {
         //add to stack
     //closing tag?
         else { 
-            std::cout << "Closing" << std::endl;
-            std::cout << valStack.top().substr(1, (valStack.top().find_first_of(">") - 1)) << std::endl;
-            std::cout << currentCheck.substr(2, (currentCheck.find_first_of(">")-2)) << std::endl;
+            if (currentCheck == "</file>") isFolder = true;
             if (valStack.top().substr(1, (valStack.top().find_first_of(">") - 1)) == currentCheck.substr(2, currentCheck.find_first_of(">")-2)) valStack.pop();
             else return false;
             std::cout << currentCheck << " - " << valStack.size() << std::endl;
