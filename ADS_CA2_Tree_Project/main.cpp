@@ -1,6 +1,7 @@
 #include <iostream>
 #include "main.h"
 #include "Tree.h"
+#include "File.h"
 
 int main() {
 	std::cout << "Beginning Tree project" << std::endl;
