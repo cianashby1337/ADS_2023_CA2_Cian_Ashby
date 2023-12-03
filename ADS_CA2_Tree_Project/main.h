@@ -94,7 +94,7 @@ Tree<File> createFileSystem(std::string xml) {
         }
         else if (currentCheck == "<file>") {
             std::cout << "File detected, create a file and move down a level" << std::endl;
-            tIter.prependChild(File(true));
+            tIter.prependChild(File(false));
             tIter.down();
             std::cout << "afterFileAdd" << t.data.isDirectory << std::endl;
         }
