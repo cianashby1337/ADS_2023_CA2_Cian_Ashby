@@ -8,7 +8,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace Step1UnitTests
 {
-	TEST_CLASS(Step1UnitTests)
+	TEST_CLASS(UnitTests)
 	{
 	public:
 		
