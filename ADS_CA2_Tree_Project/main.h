@@ -77,3 +77,7 @@ Tree<File> createFileSystem(std::string xml) {
     }
     return t;
 }
+
+std::string findWorkingDirectory(Tree<File> t) {
+    return "false";
+}
