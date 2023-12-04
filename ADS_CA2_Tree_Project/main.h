@@ -49,9 +49,9 @@ bool validator(std::string xml) {
     return valStack.empty() && xml.size() == 0 && rootClosed;
 }
 
-Tree<File> createFileSystem(std::string xml) {
-    Tree<File> t(File(true));
-    TreeIterator<File> tIter(&t);
+Tree<File>* createFileSystem(std::string xml) {
+    Tree<File>* t = new Tree<File>(File(true));
+    TreeIterator<File> tIter(t);
     std::string currentCheck, propertyStore;
     xml = xml.substr(5);
     while (!xml.empty()) {
@@ -78,6 +78,8 @@ Tree<File> createFileSystem(std::string xml) {
     return t;
 }
 
-std::string findWorkingDirectory(Tree<File> t) {
-    return "false";
+std::string findWorkingDirectory(Tree<File>* t, std::string str = "Current Working Directory: ") {
+    if (t->parent != nullptr) str = findWorkingDirectory(t->parent, str);
+    str += t->data.name + "/";
+    return str;
 }
