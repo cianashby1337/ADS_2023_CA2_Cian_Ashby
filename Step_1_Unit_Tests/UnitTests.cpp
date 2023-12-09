@@ -94,5 +94,19 @@ namespace Step1UnitTests
 			std::string tString = findWorkingDirectory(t->children->head->data);
 			Assert::IsTrue("Current Working Directory: ADS_Single_LinkedList_Exercises/Debug/" == tString);
 		}
+
+		TEST_METHOD(TestDisplayRootContents) {
+			std::string expectedString = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
+			Tree<File>* t = createFileSystem(expectedString);
+			std::string output = displayContents(t);
+			Assert::IsTrue("Enter 0 to view actions, or choose an option below:\n1. Debug\n2. .vs\n3. .git\n" == output);
+		}
+
+		TEST_METHOD(TestDisplayChildContents) {
+			std::string expectedString = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
+			Tree<File>* t = createFileSystem(expectedString);
+			std::string output = displayContents(t->children->head->data);
+			Assert::IsTrue("Enter 0 to view actions, or choose an option below:\n1. TestSinglyLinkedList.pdb - 1945600b\n2. TestSinglyLinkedList.exp - 41528b\n3. SinglyLinkedList.pdb - 978944b\n" == output);
+		}
 	};
 }
