@@ -83,3 +83,24 @@ std::string findWorkingDirectory(Tree<File>* t, std::string str = "Current Worki
     str += t->data.name + "/";
     return str;
 }
+
+std::string displayContents(Tree<File>* t) {
+    // Please choose an option below
+    std::string output = "Enter 0 to view actions, or choose an option below:\n";
+    int count = 1;
+    DListIterator<Tree<File>*> tChildIter = t->children->getIterator();
+    while (tChildIter.isValid()) {
+        File currentNode = tChildIter.currentNode->data->data;
+        if (currentNode.isDirectory) output.append(std::to_string(count) + ". " + currentNode.name + "\n");
+        else output.append(std::to_string(count) + ". " + currentNode.name + " - " + std::to_string(currentNode.length) + "b\n");
+        tChildIter.advance();
+        count++;
+    }
+    // for each child
+        // cout << n.
+        // if folder
+        // display name then newline
+        // else
+        // display name, then size, then newline
+    return output;
+}
