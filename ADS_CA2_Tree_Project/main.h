@@ -109,3 +109,7 @@ int countWithinDirectory(Tree<File>* t, Tree<File>* callingDirectory) {
     if(t == callingDirectory) return --c; // decrement as we're concerned about what it within, not including, the calling directory
     return c;
 }
+
+int sumDirectoryMemoryUsage(Tree<File>* t) {
+    return -1;
+}
