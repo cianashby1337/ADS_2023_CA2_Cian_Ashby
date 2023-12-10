@@ -85,7 +85,6 @@ std::string findWorkingDirectory(Tree<File>* t, std::string str = "Current Worki
 }
 
 std::string displayContents(Tree<File>* t) {
-    // Please choose an option below
     std::string output = "Enter 0 to view actions, or choose an option below:\n";
     int count = 1;
     DListIterator<Tree<File>*> tChildIter = t->children->getIterator();
@@ -96,11 +95,9 @@ std::string displayContents(Tree<File>* t) {
         tChildIter.advance();
         count++;
     }
-    // for each child
-        // cout << n.
-        // if folder
-        // display name then newline
-        // else
-        // display name, then size, then newline
     return output;
+}
+
+int countWithinDirectory(Tree<File>* t) {
+    return -1;
 }
