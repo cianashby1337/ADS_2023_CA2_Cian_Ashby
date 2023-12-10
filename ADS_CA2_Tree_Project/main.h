@@ -3,6 +3,7 @@
 #include <fstream>
 #include <stack>
 #include <string>
+#include <queue>
 #include "Tree.h"
 #include "TreeIterator.h"
 #include "File.h"
@@ -111,5 +112,24 @@ int countWithinDirectory(Tree<File>* t, Tree<File>* callingDirectory) {
 }
 
 int sumDirectoryMemoryUsage(Tree<File>* t) {
-    return -1;
+    int count = 0;
+    std::queue <Tree<File>*> q;
+    q.push(t);
+    while (!q.empty())
+    {
+        if(!q.front()->data.isDirectory) count += q.front()->data.length;
+        if (q.front()->children->getIterator().isValid())
+        {
+            DListIterator<Tree<File>*> iter = q.front()->children->getIterator();
+
+            while (iter.isValid())
+            {
+                q.push(iter.item());
+                iter.advance();
+            }
+
+        }
+        q.pop();
+    }
+    return count;
 }
