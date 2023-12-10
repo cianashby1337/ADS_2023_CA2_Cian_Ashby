@@ -134,6 +134,27 @@ int sumDirectoryMemoryUsage(Tree<File>* t) {
     return count;
 }
 
-std::string findSearchItem(Tree<File>* t, std::string searchString) {
-    return "failTest";
+std::string findSearchItem(TreeIterator<File> iter, std::string searchString, std::string resultString = "No match was found for ") {
+    
+    std::string path = findWorkingDirectory(iter.node).substr(27);
+    std::string result = resultString + searchString;
+
+    path = path.substr(0, path.find_last_of("/") - 1);
+    path = path.substr(0, path.find_last_of('/')+1);
+
+    std::string currName = iter.node->data.name;
+
+    if (currName.find(searchString) > currName.length() == false) {
+        if (currName == (searchString)) return "Exact match found: " + path + " > " + searchString + " <";
+        else return "Potential match found: " + path + " > " + currName + " <";
+    }
+    while (iter.childValid())
+    {
+        TreeIterator<File> iter2(iter);
+        iter2.down();
+        result = findSearchItem(iter2, searchString);
+        if (result != (resultString+searchString)) return result; 
+        iter.childForth();
+    }
+    return result;
 }
