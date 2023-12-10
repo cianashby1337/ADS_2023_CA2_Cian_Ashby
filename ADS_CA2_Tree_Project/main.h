@@ -134,6 +134,6 @@ int sumDirectoryMemoryUsage(Tree<File>* t) {
     return count;
 }
 
-std::string findSearchItem(std::string searchString) {
+std::string findSearchItem(Tree<File>* t, std::string searchString) {
     return "failTest";
 }
