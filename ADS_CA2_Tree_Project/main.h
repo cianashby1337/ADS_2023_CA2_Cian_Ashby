@@ -99,15 +99,14 @@ std::string displayContents(Tree<File>* t) {
     return output;
 }
 
-int countWithinDirectory(Tree<File>* t, Tree<File>* callingDirectory) {
+int countWithinDirectory(Tree<File>* t) {
     int c = 1;
     DListIterator<Tree<File>*> childIter = t->children->getIterator();
     while (childIter.isValid())
     {
-        c += countWithinDirectory(childIter.currentNode->data, callingDirectory);
+        c += countWithinDirectory(childIter.currentNode->data);
         childIter.advance();
     }
-    if(t == callingDirectory) return --c; // decrement as we're concerned about what it within, not including, the calling directory
     return c;
 }
 

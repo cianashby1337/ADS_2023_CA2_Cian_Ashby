@@ -23,8 +23,10 @@ int main() {
 			std::cout << "3. Count files/folders in current directory" << std::endl;
 			std::cout << "4. Prune tree" << std::endl;
 			std::cout << "5. Exit Program" << std::endl;
+
 			std::cin >> choiceInt;
 
+			std::cout << std::endl;
 			if (choiceInt == 0) {
 				if (treeIter.node->parent != nullptr) treeIter.up();
 				else std::cout << "You cannot move up past the root directory" << std::endl;
@@ -37,7 +39,7 @@ int main() {
 			else if (choiceInt == 2) 
 				std::cout << "Total memory usage within the current directory:" << sumDirectoryMemoryUsage(treeIter.node) << " b" << std::endl;
 			else if (choiceInt == 3) 
-				std::cout << "Number of entities in current directory tree:" << countWithinDirectory(treeIter.node, treeIter.node) << std::endl;
+				std::cout << "Number of entities in current directory tree:" << countWithinDirectory(treeIter.node) << std::endl;
 			else if (choiceInt == 4) 
 				std::cout << "Under Construction" << std::endl;
 			else if (choiceInt == 5)
