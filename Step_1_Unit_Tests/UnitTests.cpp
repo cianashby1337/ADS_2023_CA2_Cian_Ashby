@@ -24,138 +24,138 @@ namespace Step1UnitTests
 		}
 
 		TEST_METHOD(TestValidateCorrectNesting) {
-			std::string expectedString = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
-			Assert::IsTrue(validator(expectedString));
+			std::string xmlToValidate = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
+			Assert::IsTrue(validator(xmlToValidate));
 		}
 
 		TEST_METHOD(TestValidateUnclosedRoot) {
-			std::string expectedString = "<dir><name></name>";
-			Assert::IsFalse(validator(expectedString));
+			std::string xmlToValidate = "<dir><name></name>";
+			Assert::IsFalse(validator(xmlToValidate));
 		}
 
 		TEST_METHOD(TestValidateDoubleRoot) {
-			std::string expectedString = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir><dir></dir>";
-			Assert::IsFalse(validator(expectedString));
+			std::string xmlToValidate = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir><dir></dir>";
+			Assert::IsFalse(validator(xmlToValidate));
 		}
 
 		TEST_METHOD(TestValidateNoRoot) {
-			std::string expectedString = "<name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir>";
-			Assert::IsFalse(validator(expectedString));
+			std::string xmlToValidate = "<name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir>";
+			Assert::IsFalse(validator(xmlToValidate));
 		}
 
 		TEST_METHOD(TestValidateFolderWithSize) {
-			std::string expectedString = "<dir><size>4b</size><name></name></dir>";
-			Assert::IsFalse(validator(expectedString));
+			std::string xmlToValidate = "<dir><size>4b</size><name></name></dir>";
+			Assert::IsFalse(validator(xmlToValidate));
 		}
 
 		TEST_METHOD(TestValidateFolderWithType) {
-			std::string expectedString = "<dir><type>config</type><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
-			Assert::IsFalse(validator(expectedString));
+			std::string xmlToValidate = "<dir><type>config</type><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
+			Assert::IsFalse(validator(xmlToValidate));
 		}
 
 		TEST_METHOD(TestValidateFileWithDir) {
-			std::string expectedString = "<dir><type>config</type><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><dir></dir><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
-			Assert::IsFalse(validator(expectedString));
+			std::string xmlToValidate = "<dir><type>config</type><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><dir></dir><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
+			Assert::IsFalse(validator(xmlToValidate));
 		}
 
 		TEST_METHOD(TestTreeRootIsFolder) {
-			std::string expectedString = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
-			Tree<File> t = createFileSystem(expectedString);
+			std::string xml = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
+			Tree<File> t = createFileSystem(xml);
 			Assert::IsTrue(t.data.isDirectory);
 		}
 
 		TEST_METHOD(TestTreeRootHasCorrectName) {
-			std::string expectedString = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
-			Tree<File>* t = createFileSystem(expectedString);
+			std::string xml = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
+			Tree<File>* t = createFileSystem(xml);
 			Assert::IsTrue(t->data.name == "ADS_Single_LinkedList_Exercises");
 		}
 
 		TEST_METHOD(TestTreeFirstChildIsDebug) {
-			std::string expectedString = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
-			Tree<File>* t = createFileSystem(expectedString);
+			std::string xml = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
+			Tree<File>* t = createFileSystem(xml);
 			Assert::IsTrue(t->children->head->data->data.name == "Debug");
 		}
 
 		TEST_METHOD(TestTreeFirstGrandchildIs1945600b) {
-			std::string expectedString = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
-			Tree<File>* t = createFileSystem(expectedString);
+			std::string xml = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
+			Tree<File>* t = createFileSystem(xml);
 			Assert::AreEqual(1945600, t->children->head->data->children->head->data->data.length);
 		}
 
 		TEST_METHOD(TestWorkingDirectoryRoot) {
-			std::string expectedString = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
-			Tree<File>* t = createFileSystem(expectedString);
+			std::string xml = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
+			Tree<File>* t = createFileSystem(xml);
 			Assert::IsTrue("Current Working Directory: ADS_Single_LinkedList_Exercises/" == findWorkingDirectory(t));
 		}
 
 		TEST_METHOD(TestWorkingDirectoryChild) {
-			std::string expectedString = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
-			Tree<File>* t = createFileSystem(expectedString);
-			std::string tString = findWorkingDirectory(t->children->head->data);
-			Assert::IsTrue("Current Working Directory: ADS_Single_LinkedList_Exercises/Debug/" == tString);
+			std::string xml = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
+			Tree<File>* t = createFileSystem(xml);
+			std::string pathString = findWorkingDirectory(t->children->head->data);
+			Assert::IsTrue("Current Working Directory: ADS_Single_LinkedList_Exercises/Debug/" == pathString);
 		}
 
 		TEST_METHOD(TestDisplayRootContents) {
-			std::string expectedString = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
-			Tree<File>* t = createFileSystem(expectedString);
+			std::string xml = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
+			Tree<File>* t = createFileSystem(xml);
 			std::string output = displayContents(t);
 			Assert::IsTrue("Enter 0 to view actions, or choose an option below:\n1. Debug\n2. .vs\n3. .git\n" == output);
 		}
 
 		TEST_METHOD(TestDisplayChildContents) {
-			std::string expectedString = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
-			Tree<File>* t = createFileSystem(expectedString);
+			std::string xml = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
+			Tree<File>* t = createFileSystem(xml);
 			std::string output = displayContents(t->children->head->data);
 			Assert::IsTrue("Enter 0 to view actions, or choose an option below:\n1. TestSinglyLinkedList.pdb - 1945600b\n2. TestSinglyLinkedList.exp - 41528b\n3. SinglyLinkedList.pdb - 978944b\n" == output);
 		}
 
 		TEST_METHOD(TestCountFromRoot) {
-			std::string expectedString = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
-			Tree<File>* t = createFileSystem(expectedString);
+			std::string xml = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
+			Tree<File>* t = createFileSystem(xml);
 			int count = countWithinDirectory(t,t);
 			Assert::AreEqual(11, count);
 		}
 
 		TEST_METHOD(TestCountFromChild) {
-			std::string expectedString = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
-			Tree<File>* t = createFileSystem(expectedString);
+			std::string xml = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
+			Tree<File>* t = createFileSystem(xml);
 			int count = countWithinDirectory(t->children->head->data, t->children->head->data);
 			Assert::AreEqual(3, count);
 		}
 
 		TEST_METHOD(TestMemoryUsageFromRoot) {
-			std::string expectedString = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
-			Tree<File>* t = createFileSystem(expectedString);
+			std::string xml = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
+			Tree<File>* t = createFileSystem(xml);
 			int count = sumDirectoryMemoryUsage(t);
 			Assert::AreEqual(2966521, count);
 		}
 
 		TEST_METHOD(TestMemoryUsageFromChild) {
-			std::string expectedString = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
-			Tree<File>* t = createFileSystem(expectedString);
+			std::string xml = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
+			Tree<File>* t = createFileSystem(xml);
 			int count = sumDirectoryMemoryUsage(t->children->head->data);
 			Assert::AreEqual(2966072, count);
 		}
 
 		TEST_METHOD(TestFindCompleteFilename) {
-			std::string expectedString = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
-			Tree<File>* t = createFileSystem(expectedString);
+			std::string xml = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
+			Tree<File>* t = createFileSystem(xml);
 			TreeIterator<File> treeIter(t);
 			std::string output = findSearchItem(treeIter, "TestSinglyLinkedList.exp");
 			Assert::IsTrue("Exact match found: ADS_Single_LinkedList_Exercises/Debug/ > TestSinglyLinkedList.exp <" == output);
 		}
 
 		TEST_METHOD(TestFindPartialFilename) {
-			std::string expectedString = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
-			Tree<File>* t = createFileSystem(expectedString);
+			std::string xml = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
+			Tree<File>* t = createFileSystem(xml);
 			TreeIterator<File> treeIter(t);
 			std::string output = findSearchItem(treeIter, "Debu");
 			Assert::IsTrue("Potential match found: ADS_Single_LinkedList_Exercises/ > Debug <" == output);
 		}
 
 		TEST_METHOD(TestFindNonexistentFilename) {
-			std::string expectedString = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
-			Tree<File>* t = createFileSystem(expectedString);
+			std::string xml = "<dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>.git</name><file><name>config</name><length>353b</length><type>config</type></file><file><name>description</name><length>73b</length><type>description</type></file><file><name>HEAD</name><length>23b</length><type>HEAD</type></file></dir><dir><name>.vs</name><dir><name>ADS_Single_LinkedList_Exercises</name><dir><name>v17</name></dir></dir></dir><dir><name>Debug</name><file><name>SinglyLinkedList.pdb</name><length>978944b</length><type>pdb</type></file><file><name>TestSinglyLinkedList.exp</name><length>41528b</length><type>exp</type></file><file><name>TestSinglyLinkedList.pdb</name><length>1945600b</length><type>pdb</type></file></dir></dir>";
+			Tree<File>* t = createFileSystem(xml);
 			TreeIterator<File> treeIter(t);
 			std::string output = findSearchItem(treeIter, "BeansAndToast.grom");
 			Assert::IsTrue("No match was found for BeansAndToast.grom" == output);
