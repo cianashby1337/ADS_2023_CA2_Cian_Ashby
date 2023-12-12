@@ -40,8 +40,12 @@ int main() {
 				std::cout << "Total memory usage within the current directory:" << sumDirectoryMemoryUsage(treeIter.node) << " b" << std::endl;
 			else if (choiceInt == 3) 
 				std::cout << "Number of entities in current directory tree:" << countWithinDirectory(treeIter.node) << std::endl;
-			else if (choiceInt == 4) 
-				std::cout << "Under Construction" << std::endl;
+			else if (choiceInt == 4) {
+				std::cout << "Returning to the root directory and pruning tree..." << std::endl;
+				treeIter.root();
+				pruneTree(&treeIter);
+				treeIter.resetIterator();
+			}
 			else if (choiceInt == 5)
 				running = !running;
 			else 

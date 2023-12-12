@@ -157,3 +157,19 @@ std::string findSearchItem(TreeIterator<File> iter, std::string searchString, st
     }
     return result;
 }
+
+void pruneTree(TreeIterator<File>* iter) {
+
+    while (iter->childValid())
+    {
+        TreeIterator<File> iter2(*iter);
+        iter2.down();
+        pruneTree(&iter2);
+        if (iter->childIter.currentNode->data->data.name == "delete me") iter->removeChild();
+        else iter->childForth();
+    }
+    if (iter->node->data.isDirectory && iter->node->children->count == 0) {
+        iter->node->data.name = "delete me";
+    }
+    return;
+}
